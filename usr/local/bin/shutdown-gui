@@ -1,0 +1,27 @@
+#!/bin/sh -x
+export TEXTDOMAIN=shutdown-gui
+export OUTPUT_CHARSET=UTF-8
+icon_theme=$(grep gtk-icon-theme-name ~/.gtkrc-2.0 | cut -d= -f2 | tr -d ' ' | sed 's/"//g')
+icon_name=system-shutdown  #aqui va el nombre del icono que vas a usar y cambia segun el tema 
+icon_path=$(find /usr/share/icons/$icon_theme -type f -name "$icon_name.*" | head -n 1)
+font="TerminessNerdFont" 
+T1="<span color='#AF636A' font='44'>  </span>
+<span font='$font 20'>  $(gettext 'Shutdown')</span>"
+T2="<span color='#A3BE8C' font='44'>    </span>
+<span font='$font 20'>  $(gettext 'Lock Screen')</span>"
+T3="<span color='#BBA467' font='44'>   </span>
+<span font='$font 20'>$(gettext 'Restart WM')</span>"
+T4="<span color='#797179' font='44'>  </span>
+<span font='$font 20'>$(gettext 'Reboot')</span>"
+T5="<span color='#8E8E8E' font='44'>  </span>
+<span font='$font 20'>$(gettext 'Go to Prompt')</span>"
+T6="<span color='#F6B40D' font='44'>   </span>
+<span font='$font 20'> $(gettext 'Suspend')</span>"
+yad --title=Shutdown-gui --window-icon $icon_name --center --form --no-buttons --undecorated --timeout=10 --timeout-indicator=right \
+      --columns="3" \
+       --field=" $T1!!<span font='$font 12'>$(gettext 'Shutdown Equipment')</span>  :fbtn" "wmpoweroff" \
+       --field=" $T2!!<span font='$font 12'>$(gettext 'Lock Screen')</span>   :fbtn" "xlock"\
+       --field=" $T3!!<span font='$font 12'>$(gettext 'Restart Window Manager')</span>   :fbtn" "restartwm" \
+       --field=" $T4!!<span font='$font 12'>$(gettext 'Reboot sistem') </span>  :fbtn" "wmreboot" \
+       --field=" $T5!!<span font='$font 12'>$(gettext 'Go to Prompt')</span>   :fbtn" "wmexit"\
+       --field=" $T6!!<span font='$font 12'>$(gettext 'Suspend or Hibernate')</span>  :fbtn" "/etc/acpi/actions/suspend.sh"
