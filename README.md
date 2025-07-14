@@ -115,7 +115,7 @@ módulo se oculte o reaparezca, sin reiniciar el panel.
 ---
 ## 🛠️ Configuración del Panel XFCE con Genmon
 
-Este script en Python proporciona una interfaz gráfica para gestionar los módulos del panel
+Este script en Python (/usr/local/bin/panel-config.py proporciona una interfaz gráfica para gestionar los módulos del panel
  XFCE que utilizan el plugin Genmon. Permite activar o desactivar visualmente componentes como 
  brillo, temperatura de CPU, RAM, batería, conexión de red, aplicaciones favoritas, lanzadores y más.
 
@@ -135,7 +135,6 @@ Este script en Python proporciona una interfaz gráfica para gestionar los módu
 ![Panel-config](https://raw.githubusercontent.com/Woofshahenzup/XFCE-Genmon-Plugin-Suite-para-PuppyLinux/main/images/panel-config.png)
 
 ![Preferencias del panel](https://raw.githubusercontent.com/Woofshahenzup/XFCE-Genmon-Plugin-Suite-para-PuppyLinux/main/images/preferencias.png)
-
 
 ---
 
@@ -190,8 +189,6 @@ el mouse o el teclado.
 - Compatible con entornos ligeros como XFCE, LXDE, Openbox.
 - Ligero, rápido y altamente configurable.
 - Puede integrarse con herramientas como **Brightside** para activarse desde esquinas activas del escritorio.
----
-
 ---
 
 ## 🎛️ Tirantes (Toggle de módulos)

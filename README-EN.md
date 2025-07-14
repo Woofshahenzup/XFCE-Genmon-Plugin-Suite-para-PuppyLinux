@@ -102,7 +102,7 @@ show the module—no panel restart required
 ---   
 ## 🛠️ XFCE Panel Configuration with Genmon
 
-This Python script provides a graphical interface to manage XFCE panel modules that
+This Python script (/usr/local/bin/panel-config.py) provides a graphical interface to manage XFCE panel modules that
 use the Genmon plugin. It allows you to visually enable or disable components 
 like brightness, CPU temperature, RAM, battery, network connection, favorite apps, 
 launchers, and more.
@@ -189,3 +189,102 @@ When run with the toggle parameter, it switches the global state (visible ↔ hi
 and updates all control files.
 
     📌 Ideal for dynamic panels where modules “drop down” when interacting with the toggle. 
+```bash
+# Read toggle status
+if [ -f "$TOGGLE_STATE_FILE" ]; then 
+TOGGLE_STATE=$(cat "$TOGGLE_STATE_FILE")
+else 
+TOGGLE_STATE="hidden"
+fi
+
+# Toggle general status
+if [[ "$1" == "toggle" ]]; then 
+if [[ "$TOGGLE_STATE" == "hidden" ]]; then 
+TOGGLE_STATE="visible" 
+for FILE in "${FILES[@]}"; do 
+FILE_PATH="$HOME/.config/genmon-hide/$FILE" 
+if [ -f "$FILE_PATH" ]; then 
+rm "$FILE_PATH" 
+fi 
+donated 
+else 
+TOGGLE_STATE="hidden" 
+for FILE in "${FILES[@]}"; do
+FILE_PATH="$HOME/.config/genmon-hide/$FILE"
+if [ ! -f "$FILE_PATH" ]; then
+touch "$FILE_PATH"
+fi
+done
+fi
+echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"
+fi
+```
+![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)
+
+---
+## 🛠️ Custom Layouts with Genmon: Unlimited Creativity!
+
+Genmon isn't just for displaying text in the XFCE panel: it also lets you
+create highly customized visual widgets using ASCII code, decorative segments, and
+Pango tags to apply styles like colors, fonts, sizes, and more.
+
+### 🎨 What can you do?
+
+With Genmon, you can build widgets similar to Conky's, but with additional benefits such as:
+
+- <txtclick>: Execute commands on click.
+- <tool>: Display additional information on hover (tooltip).
+- Pango Styles: Use tags like <span> to change colors, fonts, sizes, weight, etc.
+- ASCII Decoration: Add borders, boxes, lines, and symbols for visual style.
+- Dynamic Segments: Display information that changes in real time (battery status, trash, network, etc.).
+
+### 📦 Example: Trash Widget
+
+This script displays the status of the trash (empty or full) with an icon, dynamic colors, decorative borders, and interactive actions:
+```bash
+#!/usr/bin/env bash
+
+# Icon and colors
+ICON_TRASH="󰩺"
+COLOR_EMPTY="#2ECC71"
+COLOR_FULL="#95A5A6"
+TRASH_PATH="$HOME/.local/share/Trash/files"
+
+# Check if there are files in the trash
+if [[ -d "$TRASH_PATH" && "$(ls -A "$TRASH_PATH")" ]]; then 
+TRASH_STATUS="Full" 
+COLOR="$COLOR_FULL"
+else 
+TRASH_STATUS="Empty" 
+COLOR="$COLOR_EMPTY"
+fi
+
+# Main line with color and icon
+DISPLAY_LINE="<span foreground='$COLOR'>$ICON_TRASH Trash</span>"
+
+# Decorative borders
+WIDTH=${#DISPLAY_LINE}
+TOP="╭──────╮"
+MID="<span foreground='#35C5B9'>│ $DISPLAY_LINE │</span>"
+BOTTOM="╰──────╯"
+
+# Output for Genmon
+echo -e "<txt><span foreground='#ADD387'>$TOP</span>\n$MID\n<span foreground='#ADD387'>$BOTTOM</span></txt>"
+echo -e "<tool><span font_family='Terminess Nerd Font' font_size='16000' weight='bold'>Trash status: $TRASH_STATUS\nClick to open the trash folder.</span></tool>"
+echo -e "<txtclick>exo-open --launch FileManager trash:///</txtclick>"
+```
+Result:
+
+![Trash Widget in XFCE](https://i.postimg.cc/kXLvdcv1/Screenshot-2025-05-01-02-59-17.png)
+
+## 🛠️ What can you customize? 
+
+- Visual design with borders, icons, and colors.
+- Typographic styling with <span> tags using Pango.
+- Direct interaction with clicks and tooltips.
+- Conky-like widgets, but integrated into the XFCE panel.
+---
+
+![STYLES](https://i.postimg.cc/QMwxK0w7/cpuram.gif)
+
+---
