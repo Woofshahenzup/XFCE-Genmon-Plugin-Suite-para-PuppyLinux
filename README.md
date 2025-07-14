@@ -247,6 +247,8 @@ if [[ "$1" == "toggle" ]]; then
     echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"
 fi
 ```
+![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)
+
 ---
 ## 🛠️ Diseños Personalizados con Genmon: ¡Creatividad sin límites!
 
@@ -302,9 +304,9 @@ echo -e "<tool><span font_family='Terminess Nerd Font' font_size='16000' weight=
 echo -e "<txtclick>exo-open --launch FileManager trash:///</txtclick>"
 ```
 Resultado: 
-╭────────────╮
-│ 󰩺 Trash    │
-╰────────────╯
+
+![Widget de papelera en XFCE](https://i.postimg.cc/kXLvdcv1/Screenshot-2025-05-01-02-59-17.png)
+
 ## 🛠️ ¿Qué puedes personalizar?
 
   -  Diseño visual con bordes, íconos y colores.
@@ -312,3 +314,7 @@ Resultado:
   -  Interacción directa con clics y tooltips.
   -  Widgets tipo Conky, pero integrados al panel XFCE.
 ---   
+
+![ESTILOS](https://i.postimg.cc/QMwxK0w7/cpuram.gif)
+
+---
