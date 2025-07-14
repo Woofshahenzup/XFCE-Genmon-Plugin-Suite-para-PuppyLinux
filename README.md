@@ -5,6 +5,8 @@ Una colección modular de scripts diseñados para el plugin Genmon en XFCE, que 
 🔗 **Referencia oficial del plugin Genmon:**  
 [docs.xfce.org → xfce4-genmon-plugin](https://docs.xfce.org/panel-plugins/xfce4-genmon-plugin/start)
 
+![Panel](images/panels.png)
+
 ---
 
 ## 🧩 ¿Qué incluye esta suite?
@@ -53,10 +55,13 @@ XFCE-Genmon-Plugin-Suite-para-PuppyLinux/
 │           ├── shutdown-gui
 │           └── notificador-bateria.sh
 
-## ⚙️ Detalles técnicos
-## 🌐 Localización automática
+---
 
-Los scripts detectan el idioma del sistema mediante la variable de entorno $LANG, y adaptan dinámicamente el texto mostrado:
+## ⚙️ Detalles técnicos
+
+### 🌐 Localización automática
+
+Los scripts detectan el idioma del sistema mediante la variable de entorno `$LANG`, y adaptan dinámicamente el texto mostrado:
 
 ```bash
 LANG_CODE=$(echo "$LANG" | cut -d '_' -f1 | tr '[:upper:]' '[:lower:]')
@@ -69,10 +74,12 @@ set_tooltip_text() {
 }
 set_tooltip_text "$LANG_CODE"
 
+---
 
 ## 🙈 Ocultación condicional (basada en archivo)
 
-Cada módulo puede ocultarse si existe un archivo específico en ~/.config/genmon-hide/. Por ejemplo, para ocultar el icono del terminal:
+Cada módulo puede ocultarse si existe un archivo específico en ~/.config/genmon-hide/. 
+Por ejemplo, para ocultar el icono del terminal:
 HIDE_FILE_TERMINAL="$HOME/.config/genmon-hide/terminal"
 
 ```bash
@@ -82,8 +89,10 @@ if [ -f "$HIDE_FILE_TERMINAL" ]; then
     exit 0
 fi
 
+---
 
-De este modo, basta con crear (o eliminar) el archivo ~/config/genmon-hide/terminal para que el módulo se oculte o reaparezca, sin reiniciar el panel.
+De este modo, basta con crear (o eliminar) el archivo ~/config/genmon-hide/terminal para que el 
+módulo se oculte o reaparezca, sin reiniciar el panel.
 ## 💡 Notas
 
     Totalmente compatible con XFCE en distribuciones Puppy Linux.
@@ -91,3 +100,25 @@ De este modo, basta con crear (o eliminar) el archivo ~/config/genmon-hide/termi
     No requiere privilegios root para la mayoría de funciones.
 
     Modular: puedes activar o desactivar cualquier componente fácilmente.
+---
+## 🛠️ Configuración del Panel XFCE con Genmon
+
+Este script en Python proporciona una interfaz gráfica para gestionar los módulos del panel
+ XFCE que utilizan el plugin Genmon. Permite activar o desactivar visualmente componentes como 
+ brillo, temperatura de CPU, RAM, batería, conexión de red, aplicaciones favoritas, lanzadores y más.
+
+### ✨ Características
+
+- Interfaz gráfica basada en **GTK3**
+- Soporte multilingüe: **Español** e **Inglés**
+- Organización por pestañas:
+  - **Sistema**
+  - **Red y Seguridad**
+  - **Aplicaciones**
+  - **Lanzadores**
+  - **Panel**
+- Conmutadores para ocultar o mostrar módulos mediante archivos en `~/.config/genmon-hide`
+- Detección automática del ID de Genmon en la configuración del panel XFCE (`~/.config/xfce4/panel`)
+
+![Panel-config](images/panel-config.png)
+![Preferencias del panel](images/preferencias.png)
