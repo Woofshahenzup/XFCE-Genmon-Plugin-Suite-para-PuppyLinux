@@ -54,14 +54,15 @@ XFCE-Genmon-Plugin-Suite-para-PuppyLinux/
 │           ├── panel-config.py
 │           ├── shutdown-gui
 │           └── notificador-bateria.sh
-
+```
 ---
 
 ## ⚙️ Detalles técnicos
 
 ### 🌐 Localización automática
 
-Los scripts detectan el idioma del sistema mediante la variable de entorno `$LANG`, y adaptan dinámicamente el texto mostrado:
+Los scripts detectan el idioma del sistema mediante la variable de entorno `$LANG`, 
+y adaptan dinámicamente el texto mostrado:
 
 ```bash
 LANG_CODE=$(echo "$LANG" | cut -d '_' -f1 | tr '[:upper:]' '[:lower:]')
@@ -73,7 +74,7 @@ set_tooltip_text() {
     esac
 }
 set_tooltip_text "$LANG_CODE"
-
+```
 ---
 
 ## 🙈 Ocultación condicional (basada en archivo)
@@ -88,7 +89,7 @@ if [ -f "$HIDE_FILE_TERMINAL" ]; then
     echo -e "<txt></txt>\n<tool></tool>"
     exit 0
 fi
-
+```
 ---
 
 De este modo, basta con crear (o eliminar) el archivo ~/config/genmon-hide/terminal para que el 
@@ -120,5 +121,5 @@ Este script en Python proporciona una interfaz gráfica para gestionar los módu
 - Conmutadores para ocultar o mostrar módulos mediante archivos en `~/.config/genmon-hide`
 - Detección automática del ID de Genmon en la configuración del panel XFCE (`~/.config/xfce4/panel`)
 
-![Panel-config](images/panel-config.png)
-![Preferencias del panel](images/preferencias.png)
+![Panel-config](https://github.com/Woofshahenzup/XFCE-Genmon-Plugin-Suite-para-PuppyLinux/tree/main/images/panel-config.png)
+![Preferencias del panel](https://github.com/Woofshahenzup/XFCE-Genmon-Plugin-Suite-para-PuppyLinux/tree/main/images/preferencias.png)
