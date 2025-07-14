@@ -76,6 +76,13 @@ set_tooltip_text() {
     esac
 }
 set_tooltip_text "$LANG_CODE"
+ === 🧾 Tooltip ===
+MORE_INFO="<tool>"
+MORE_INFO+="<span font_family='$FONT_MAIN' font_size='$TOOLTIP_FONT_SIZE' weight='$TOOLTIP_WEIGHT' foreground='$COLOR_ACCENT'>"
+MORE_INFO+="$TOOLTIP_TEXT"
+MORE_INFO+="</span>"
+MORE_INFO+="</tool>"
+
 ```
 ---
 
@@ -83,9 +90,11 @@ set_tooltip_text "$LANG_CODE"
 
 Cada módulo puede ocultarse si existe un archivo específico en ~/.config/genmon-hide/. 
 Por ejemplo, para ocultar el icono del terminal:
-HIDE_FILE_TERMINAL="$HOME/.config/genmon-hide/terminal"
+
 
 ```bash
+
+HIDE_FILE_TERMINAL="$HOME/.config/genmon-hide/terminal"
 
 if [ -f "$HIDE_FILE_TERMINAL" ]; then
     echo -e "<txt></txt>\n<tool></tool>"
@@ -208,5 +217,98 @@ estado general (`visible` ↔ `hidden`) y se actualizan todos los archivos de co
 
 > 📌 Ideal para crear paneles dinámicos donde los módulos se “despliegan” al 
 interactuar con el tirante.
+```bash
+# Leer el estado del toggle
+if [ -f "$TOGGLE_STATE_FILE" ]; then
+    TOGGLE_STATE=$(cat "$TOGGLE_STATE_FILE")
+else
+    TOGGLE_STATE="hidden"
+fi
 
+# Alternar el estado general
+if [[ "$1" == "toggle" ]]; then
+    if [[ "$TOGGLE_STATE" == "hidden" ]]; then
+        TOGGLE_STATE="visible"
+        for FILE in "${FILES[@]}"; do
+            FILE_PATH="$HOME/.config/genmon-hide/$FILE"
+            if [ -f "$FILE_PATH" ]; then
+                rm "$FILE_PATH"
+            fi
+        done
+    else
+        TOGGLE_STATE="hidden"
+        for FILE in "${FILES[@]}"; do
+            FILE_PATH="$HOME/.config/genmon-hide/$FILE"
+            if [ ! -f "$FILE_PATH" ]; then
+                touch "$FILE_PATH"
+            fi
+        done
+    fi
+    echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"
+fi
+```
 ---
+## 🛠️ Diseños Personalizados con Genmon: ¡Creatividad sin límites!
+
+Genmon no solo sirve para mostrar texto en el panel de XFCE: también te permite 
+crear widgets visuales altamente personalizados usando código ASCII, segmentos decorativos, y 
+etiquetas Pango para aplicar estilos como colores, fuentes, tamaños y más.
+
+### 🎨 ¿Qué puedes hacer?
+
+Con Genmon puedes construir widgets similares a los de Conky, pero con ventajas adicionales como:
+
+  -  <txtclick>: Ejecuta comandos al hacer clic.
+  -  <tool>: Muestra información adicional al pasar el cursor (tooltip).
+  -  Estilos con Pango: Usa etiquetas como <span> para cambiar colores, fuentes, tamaños, peso, etc.
+  -  Decoración con ASCII: Añade bordes, cajas, líneas y símbolos para dar estilo visual.
+  -  Segmentos dinámicos: Muestra información que cambia en tiempo real (estado de batería, papelera, 
+  -  red, etc.).
+
+### 📦 Ejemplo: Widget de Papelera
+
+Este script muestra el estado de la papelera (vacía o llena) con un ícono, 
+colores dinámicos, bordes decorativos y acciones interactivas:
+```bash
+#!/usr/bin/env bash
+
+# Ícono y colores
+ICON_TRASH="󰩺"
+COLOR_EMPTY="#2ECC71"
+COLOR_FULL="#95A5A6"
+TRASH_PATH="$HOME/.local/share/Trash/files"
+
+# Verifica si hay archivos en la papelera
+if [[ -d "$TRASH_PATH" && "$(ls -A "$TRASH_PATH")" ]]; then
+  TRASH_STATUS="Full"
+  COLOR="$COLOR_FULL"
+else
+  TRASH_STATUS="Empty"
+  COLOR="$COLOR_EMPTY"
+fi
+
+# Línea principal con color e ícono
+DISPLAY_LINE="<span foreground='$COLOR'>$ICON_TRASH Trash</span>"
+
+# Bordes decorativos
+WIDTH=${#DISPLAY_LINE}
+TOP="╭──────╮"
+MID="<span foreground='#35C5B9'>│ $DISPLAY_LINE │</span>"
+BOTTOM="╰──────╯"
+
+# Salida para Genmon
+echo -e "<txt><span foreground='#ADD387'>$TOP</span>\n$MID\n<span foreground='#ADD387'>$BOTTOM</span></txt>"
+echo -e "<tool><span font_family='Terminess Nerd Font' font_size='16000' weight='bold'>Trash status: $TRASH_STATUS\nClick to open the trash folder.</span></tool>"
+echo -e "<txtclick>exo-open --launch FileManager trash:///</txtclick>"
+```
+Resultado: 
+╭────────────╮
+│ 󰩺 Trash    │
+╰────────────╯
+## 🛠️ ¿Qué puedes personalizar?
+
+  -  Diseño visual con bordes, íconos y colores.
+  -  Estilo tipográfico con etiquetas <span> usando Pango.
+  -  Interacción directa con clics y tooltips.
+  -  Widgets tipo Conky, pero integrados al panel XFCE.
+---   
