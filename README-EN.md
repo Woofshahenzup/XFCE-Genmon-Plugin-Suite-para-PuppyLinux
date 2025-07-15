@@ -219,10 +219,10 @@ fi
 echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"
 fi
 ```
+---
 
 ![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)
 
----
 ## 🛠️ Custom Layouts with Genmon: Unlimited Creativity!
 
 Genmon isn't just for displaying text in the XFCE panel: it also lets you

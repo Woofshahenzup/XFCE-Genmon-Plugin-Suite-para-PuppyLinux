@@ -244,10 +244,10 @@ if [[ "$1" == "toggle" ]]; then
     echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"
 fi
 ```
+---
 
 ![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)
 
----
 ## 🛠️ Diseños Personalizados con Genmon: ¡Creatividad sin límites!
 
 Genmon no solo sirve para mostrar texto en el panel de XFCE: también te permite 
