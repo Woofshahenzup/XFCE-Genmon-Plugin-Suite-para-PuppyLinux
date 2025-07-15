@@ -219,6 +219,7 @@ fi
 echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"
 fi
 ```
+
 ![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)
 
 ---
