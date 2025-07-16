@@ -31,6 +31,60 @@ This suite is optimized for Puppy Linux and integrates directly into its filesys
 
 ---
 
+## 🧭 Compatibility and Recommendations for Puppy Linux and Mainstream Linux Users
+
+These scripts are designed to integrate with the XFCE environment and the Genmon plugin, offering a rich visual experience with system information, weather, devices, and more. While they work well on mainstream Linux distributions, they have been specially tested and optimized for Puppy Linux, proving that even on lightweight systems, a functional and attractive interface can be achieved.
+
+### 🐾 Puppy Linux Users
+
+Puppy Linux is a nimble, efficient, and surprisingly capable distribution. Despite its minimalist approach, you can run these scripts without any issues, as long as you keep the following in mind:
+
+### ✅ Advantages
+
+Fast boot and low power consumption: Puppy allows you to run these scripts without overloading the system, ideal for computers with limited resources.
+Adaptable Environment: Although Puppy doesn't always include XFCE by default, it can be easily installed alongside Genmon to take advantage of its full functionality. Optional Persistence: Using Pupsave or frugal mode, configuration files like ~/.config/genmon-hide are persisted between sessions.
+
+### ⚠️ Recommendations
+
+Install minimal dependencies if not present:
+curl jq yad wmctrl amixer pavucontrol pmount
+
+## 🖥️ Mainstream Linux Users
+
+On distributions like Debian, Ubuntu, Arch, Fedora, etc., these scripts
+work more predictably, especially if using XFCE with Genmon.
+
+### ✅ Recommended Requirements
+
+XFCE environment with the Genmon plugin enabled.
+Python 3 + PyGObject to run config-panel.py.
+Nerd Font installed for visual icons.
+
+## ⚠️ Considerations
+
+Dependencies not always pre-installed. Some distros do not include tools such as jq, yad, pmount, or pavucontrol by default. You must install them manually.
+Varied environments. If you don't use XFCE, you'll need to adapt some scripts that depend on Genmon or environment-specific tools.
+More complex configuration. Unlike Puppy, which typically has a single-user structure, conventional distros may require per-user settings, permissions, or specific paths.
+
+### ✅ Recommendations
+
+Make sure you have XFCE installed with the Genmon plugin.
+Install the necessary dependencies:
+sudo apt install curl jq yad wmctrl amixer pavucontrol pmount or
+use its equivalent on your system.
+
+Verify that the scripts have access to paths such as ~/.config/xfce4/panel and ~/.config/genmon-hide.
+
+### 🧠 Conclusion
+
+These scripts have proven to be versatile, modular, and efficient,
+both on lightweight systems like Puppy Linux and on conventional distributions.
+While each environment has its own specificities, with minimal configuration,
+it's possible to enjoy an informative, aesthetic, and functional interface.
+The key is to adapt the modules to your workflow and graphical environment.
+
+---
+
 ## 📂 System structure
 
 The suite is organized to integrate directly into Puppy Linux's filesystem:
