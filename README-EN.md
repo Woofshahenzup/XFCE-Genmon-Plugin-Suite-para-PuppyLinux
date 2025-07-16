@@ -117,8 +117,8 @@ launchers, and more.
    -   Launchers
    -   Panel
 
-Toggles modules by creating/removing files in ~/.config/genmon-hide
-Automatically detects Genmon IDs from XFCE panel configuration (~/.config/xfce4/panel)
+Toggles modules by creating/removing files in `~/.config/genmon-hide`
+Automatically detects Genmon IDs from XFCE panel configuration (`~/.config/xfce4/panel`)
 
 ![Panel-config](https://raw.githubusercontent.com/Woofshahenzup/XFCE-Genmon-Plugin-Suite-para-PuppyLinux/main/images/panel-config.png)
 
