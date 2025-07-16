@@ -250,7 +250,7 @@ fi
 
 ## 🎬 Vista previa
 
-<img src="https://i.postimg.cc/SKQyCNch/animated2.gif" width="500" alt="TOGGLE"/>
+[![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)](https://postimg.cc/v4jFdyPq)
 
 ---
 
