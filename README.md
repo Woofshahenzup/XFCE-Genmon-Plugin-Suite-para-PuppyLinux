@@ -248,6 +248,8 @@ fi
 
 ![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)
 
+---
+
 ## 🛠️ Diseños Personalizados con Genmon: ¡Creatividad sin límites!
 
 Genmon no solo sirve para mostrar texto en el panel de XFCE: también te permite 
@@ -315,4 +317,47 @@ Resultado:
 
 ![ESTILOS](https://i.postimg.cc/QMwxK0w7/cpuram.gif)
 
+---
+
+## 🌦️ Genmon Weather Scripts (Bash + Nerd Fonts + wttr.in y Openweather 
+Estos script está diseñado para integrarse con el Genmon plugin en entornos
+de paneles como XFCE o GNOME, mostrando el estado del tiempo actual
+en tu barra de tareas con íconos estilizados gracias a Nerd Fonts tratare de expliar el
+mas completo.
+
+### 📌 ¿Qué hace este script?
+  - Obtiene el clima de tu ciudad usando la API pública de wttr.in.
+  - Muestra la temperatura actual, máxima y mínima del día.
+  - Incluye información sobre viento y humedad.
+  - Cambia automáticamente el ícono del clima según el estado del 
+    tiempo (sol, lluvia, niebla, nieve, etc.).
+  - Se actualiza automáticamente cada 5 minutos (gracias a un sistema de caché).
+  - Soporta idiomas: actualmente español (es) e inglés (por defecto).
+  - Usa Nerd Fonts para mostrar íconos bonitos y personalizados.
+  - Al hacer clic en el ícono puedes cambiar de ciudad fácilmente mediante
+    un diálogo gráfico (yad).
+
+### 📌  ¿Cómo funciona a nivel técnico?
+   - Usa curl para obtener datos en JSON desde wttr.in.
+   - Parsea los datos usando jq.
+   - Guarda el resultado en un archivo temporal (/tmp) para evitar consultas innecesarias.
+   - Traduce descripciones del clima a tu idioma local según la variable de entorno $LANG.
+   - Guarda la ciudad actual en ~/.config/genmon-weather-city.txt.
+   - Los íconos del clima como ☀️ o 🌧️ son convertidos a glifos compatibles con 
+     Nerd Fonts para una visualización consistente.
+     
+### 📸 Ejemplo de salida del script (modo texto)   
+```xml 
+<txt> 󰖔  Despejado 25°C </txt> El Panel
+
+<tootip> San Salvador, El Salvador 
+      ──────────────────────────
+             󰖔  25°C
+      ──────────────────────────
+       Max 30°C /   Min 20°C
+       Vto 4 km/h /  Hum 89%
+       ──────────────────────────
+        Mié  24 °C   Soleado
+        Jue  24 °C   Soleado
+        Vie  24 °C   Soleado </tooltip>
 ---

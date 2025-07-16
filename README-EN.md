@@ -289,3 +289,42 @@ Result:
 ![STYLES](https://i.postimg.cc/QMwxK0w7/cpuram.gif)
 
 ---
+## 🌦️ Genmon Weather Scripts (Bash + Nerd Fonts + wttr.in and Openweather)
+This script is designed to integrate with the Genmon plugin in panel environments
+ such as XFCE or GNOME, displaying the current weather in your taskbar 
+ with stylized icons thanks to Nerd Fonts. I will try to explain it in more detail.
+
+### 📌 What does this script do?
+  - Gets the weather for your city using the wttr.in public API.
+  - Displays the current, maximum, and minimum temperatures for the day.
+  - Includes wind and humidity information.
+  - Automatically changes the weather icon based on the weather (sun, rain, fog, snow, etc.).
+  - Automatically updates every 5 minutes (thanks to a caching system).
+  - Supports languages: currently Spanish (es) and English (by default).
+  - Uses Nerd Fonts to display beautiful, custom icons.
+  - Clicking on the icon, you can easily change the city using
+  a graphical dialog (yad).
+
+### 📌 How does it work on a technical level?
+  - Use curl to get JSON data from wttr.in.
+  - Parse the data using jq.
+  - Save the result to a temporary file (/tmp) to avoid unnecessary queries.
+  - Translate weather descriptions into your local language based on the $LANG environment variable.
+  - Save the current city to ~/.config/genmon-weather-city.txt.
+  - Weather icons like ☀️ or 🌧️ are converted to Nerd Fonts-compatible glyphs for consistent display.
+
+### 📸 Example script output (text mode)
+```xml
+<txt> 󰖔 Clear 25°C </txt> The Panel
+
+<tootip> San Salvador, El Salvador 
+────────────────────────── 
+              󰖔 25°C 
+────────────────────────── 
+      Max 30°C /  Min 20°C 
+     Vto 4 km/h /  Hum 89%
+──────────────────────────────
+      Wed 24 °C  Sunny
+      Thu 24 °C  Sunny
+      Fri 24 °C  Sunny </tooltip>
+---
