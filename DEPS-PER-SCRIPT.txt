@@ -221,4 +221,124 @@ Dependencias / Dependencies:
 - xrandr             # para detectar resoluciones y pantallas
 -skippy-xd-wrapper  #Herramienta que muestra una vista en miniatura
 
+[config-panel.py]
+
+# ES: Interfaz gráfica en GTK para configurar la visibilidad de módulos Genmon en el panel XFCE. Permite activar o desactivar scripts mediante interruptores. Soporta localización en español e inglés.
+# EN: GTK graphical interface to configure visibility of Genmon modules in the XFCE panel. Allows enabling/disabling scripts via switches. Supports Spanish and English localization.
+
+Dependencias / Dependencies:
+- python3 >= 3.6
+- PyGObject (python3-gi)     # bindings de GTK para Python
+- GTK+ 3                     # biblioteca gráfica GTK versión 3
+- GLib                      # para temporizadores y utilidades
+- Acceso a ~/.config/xfce4/panel y ~/.config/genmon-hide
+
+[save-space.sh]
+
+# ES: Muestra el uso del espacio en disco en modo live o Pupsave. Presenta porcentajes, colores temáticos e íconos según el nivel de uso. Soporta localización en español e inglés.
+# EN: Displays disk usage in live mode or Pupsave. Shows percentages, themed colors, and icons based on usage level. Supports Spanish and English localization.
+
+Dependencias / Dependencies:
+- bash >= 4.0
+- coreutils         # df, awk, echo, etc.
+- Nerd Fonts        # para íconos personalizados (ej. 󰡴, 󰡵, etc.)
+- UTF-8 locale      # se recomienda tener `en_US.UTF-8` configurado
+- pmount (opcional) # para montar dispositivos desde la interfaz (usado en <txtclick>)
+
+[trash.sh]
+
+# ES: Muestra el estado de la papelera (vacía o llena) con íconos y colores temáticos. Incluye tooltip informativo y acción para abrir la papelera con un clic. Soporta localización en español e inglés.
+# EN: Displays trash status (empty or full) with themed icons and colors. Includes informative tooltip and click action to open the trash folder. Supports Spanish and English localization.
+
+Dependencias / Dependencies:
+- bash >= 4.0
+- coreutils         # ls, echo, etc.
+- Nerd Fonts        # para íconos personalizados (ej. 󰩺)
+- exo-utils         # exo-open para abrir la papelera (XFCE)
+- UTF-8 locale      # se recomienda tener `en_US.UTF-8` configurado
+
+[usb-detect.sh]
+
+# ES: Detecta dispositivos USB conectados, muestra su estado (montado/no montado), sistema de archivos, tamaño y etiqueta. Incluye íconos, colores temáticos, sonidos de inserción/extracción y acción de montaje. Soporta localización en español e inglés.
+# EN: Detects connected USB devices, shows their status (mounted/unmounted), filesystem, size, and label. Includes icons, themed colors, insert/remove sounds, and mount action. Supports Spanish and English localization.
+
+Dependencias / Dependencies:
+- bash >= 4.0
+- coreutils         # lsblk, echo, cat, etc.
+- udev              # udevadm para verificar si el dispositivo es USB
+- blkid             # para obtener etiqueta y tipo de sistema de archivos
+- lsblk             # para listar dispositivos y tamaños
+- aplay             # para reproducir sonidos (paquete alsa-utils)
+- pmount (opcional) # para montar dispositivos desde la interfaz
+- Nerd Fonts        # para íconos personalizados (ej. 󱊟)
+- UTF-8 locale      # se recomienda tener `en_US.UTF-8` configurado
+
+[virtual-desktop2.sh]
+
+# ES: Muestra el escritorio virtual actual y el total de escritorios disponibles. Representa cada escritorio con íconos visuales y permite cambiar al siguiente con un clic. Soporta localización en español e inglés.
+# EN: Displays the current virtual desktop and total available desktops. Represents each desktop with visual icons and allows switching to the next one via click. Supports Spanish and English localization.
+
+Dependencias / Dependencies:
+- bash >= 4.0
+- wmctrl             # para obtener y cambiar escritorios virtuales
+- Nerd Fonts         # para íconos personalizados (ej. , )
+- UTF-8 locale       # se recomienda tener `en_US.UTF-8` configurado
+- XFCE + Genmon      # para mostrar la salida en el panel XFCE
+
+[virtual-desktop.sh]
+
+# ES: Muestra el escritorio virtual actual y el total de escritorios disponibles. Compatible con gestores de ventanas tradicionales y con Fusilli (modo viewport). Incluye íconos visuales, colores temáticos y acción para cambiar al siguiente escritorio. Soporta localización en español e inglés.
+# EN: Displays the current virtual desktop and total available desktops. Compatible with traditional window managers and Fusilli (viewport mode). Includes visual icons, themed colors, and click action to switch to the next desktop. Supports Spanish and English localization.
+
+Dependencias / Dependencies:
+- bash >= 4.0
+- wmctrl             # para obtener y cambiar escritorios virtuales
+- xrandr             # para detectar resolución de pantalla (modo Fusilli)
+- Nerd Fonts         # para íconos personalizados (ej. , )
+- UTF-8 locale       # se recomienda tener `en_US.UTF-8` configurado
+- XFCE + Genmon      # para mostrar la salida en el panel XFCE
+
+[volume.sh]
+
+# ES: Muestra el nivel de volumen del sistema con íconos y colores según el porcentaje. Detecta si está silenciado y ofrece tooltip informativo. Al hacer clic, abre el control de volumen de PulseAudio. Soporta localización en español e inglés.
+# EN: Displays system volume level with icons and colors based on percentage. Detects mute status and provides informative tooltip. Clicking opens PulseAudio Volume Control. Supports Spanish and English localization.
+
+Dependencias / Dependencies:
+- bash >= 4.0
+- amixer (alsa-utils)       # para obtener el nivel de volumen
+- pavucontrol               # para abrir el control de volumen gráfico
+- Nerd Fonts                # para íconos personalizados (ej. , , )
+- UTF-8 locale              # se recomienda tener `en_US.UTF-8` configurado
+- XFCE + Genmon             # para mostrar la salida en el panel XFCE
+
+[weather.sh]
+
+# ES: Muestra el clima actual de una ciudad configurable usando la API de OpenWeather. Presenta íconos, colores temáticos y tooltip con detalles como temperatura, humedad, viento y condición. Permite cambiar la ciudad mediante un cuadro de entrada. Soporta localización en español e inglés.
+# EN: Displays current weather for a configurable city using the OpenWeather API. Shows icons, themed colors, and tooltip with details like temperature, humidity, wind, and condition. Allows changing the city via input dialog. Supports Spanish and English localization.
+
+Dependencias / Dependencies:
+- bash >= 4.0
+- curl                 # para obtener datos desde OpenWeather
+- jq                   # para procesar JSON
+- yad (opcional)       # para entrada gráfica de ciudad al hacer clic
+- Nerd Fonts           # para íconos personalizados (ej. , , )
+- UTF-8 locale         # se recomienda tener `en_US.UTF-8` configurado
+- XFCE + Genmon        # para mostrar la salida en el panel XFCE
+- Cuenta en OpenWeather + API Key válida
+
+[weather_wttr.sh]
+
+# ES: Muestra el clima actual y pronóstico de 3 días usando la API de wttr.in. Presenta íconos, colores temáticos, traducción de condiciones meteorológicas y permite cambiar la ciudad mediante un cuadro de entrada. Soporta localización en español e inglés.
+# EN: Displays current weather and 3-day forecast using the wttr.in API. Shows icons, themed colors, translated weather conditions, and allows changing the city via input dialog. Supports Spanish and English localization.
+
+Dependencias / Dependencies:
+- bash >= 4.0
+- curl                 # para obtener datos desde wttr.in
+- jq                   # para procesar JSON
+- yad (opcional)       # para entrada gráfica de ciudad y mensajes emergentes
+- md5sum               # para generar caché por ciudad
+- Nerd Fonts           # para íconos personalizados (ej. ☀️, 🌧️, ❄️)
+- UTF-8 locale         # se recomienda tener `en_US.UTF-8` configurado
+- XFCE + Genmon        # para mostrar la salida en el panel XFCE
+
 --continue--
