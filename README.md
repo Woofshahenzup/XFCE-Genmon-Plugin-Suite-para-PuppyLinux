@@ -248,7 +248,11 @@ fi
 ```
 ---
 
- ![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)
+## 🎬 Vista previa
+
+<img src="https://i.postimg.cc/SKQyCNch/animated2.gif" width="500" alt="TOGGLE"/>
+
+---
 
 
 ## 🛠️ Diseños Personalizados con Genmon: ¡Creatividad sin límites!
