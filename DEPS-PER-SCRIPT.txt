@@ -1,0 +1,224 @@
+# ES: Este archivo contiene una lista de dependencias requeridas por cada script incluido en este proyecto.
+# La finalidad es facilitar la instalación y el diagnóstico de errores relacionados con dependencias faltantes.
+# Las dependencias están listadas por nombre de script, y pueden incluir binarios del sistema, comandos externos, 
+# o módulos de Python u otros lenguajes.
+
+# EN: This file contains a list of dependencies required by each script included in this project.
+# The goal is to make installation and troubleshooting easier when missing dependencies are encountered.
+# Dependencies are listed by script name and may include system binaries, external commands, 
+# or Python modules (or modules from other languages).
+
+# Aquí debajo se listan las dependencias / Dependencies are listed below:
+
+[batt.sh]
+
+# ES: Script para mostrar el estado de la batería en Genmon usando iconos de Nerd Fonts y detección mediante acpi.
+# EN: Script to display battery status in Genmon using Nerd Font icons and battery info via acpi.
+
+Dependencias / Dependencies:
+- bash
+- acpi                   # Para obtener el estado y nivel de la batería
+- cbatticon             # Indicador de batería en el sistema (mencionado como dependencia)
+- yad                   # Utilidad de diálogo en GTK (posiblemente usada en notificador-bateria.sh)
+- nerd fonts (Terminess Nerd Font)  # Para mostrar los iconos correctamente en el panel
+
+[notificador-bateria.sh]
+
+# ES: Script auxiliar para mostrar notificaciones emergentes sobre el estado de la batería.
+# EN: Auxiliary script to show popup notifications about battery status.
+
+Dependencias / Dependencies:
+- bash
+- yad             # Utilizado para mostrar ventanas emergentes o diálogos gráficos
+- acpi            # Para consultar el estado y porcentaje de batería
+
+[brightness2.sh]
+
+# ES: Script para mostrar el nivel de brillo de la pantalla en el panel XFCE usando Genmon y xrandr.
+# EN: Script to display screen brightness level in the XFCE panel using Genmon and xrandr.
+
+Dependencias / Dependencies:
+- bash
+- xrandr                # Para obtener y controlar el nivel de brillo de la pantalla
+- nerd fonts (Terminess Nerd Font)  # Para mostrar iconos de brillo personalizados
+- /usr/local/dcontrol/dcontrol  # Script externo ejecutado al hacer clic (debe estar presente y ser funcional)
+
+[brightness.sh]
+
+# ES: Versión alternativa del script de brillo que detecta automáticamente la herramienta disponible para obtener el nivel de brillo (brightnessctl, sysfs o xrandr).
+# EN: Alternate version of the brightness script that automatically detects the available method to get brightness (brightnessctl, sysfs, or xrandr).
+
+Dependencias / Dependencies:
+- bash
+- brightnessctl (opcional)    # Para obtener el nivel de brillo si está disponible
+- acceso a /sys/class/backlight (opcional) # Requiere permisos adecuados si brightnessctl no está presente
+- xrandr (como último recurso) # Se usa si no se encuentran los anteriores
+- nerd fonts (Terminess Nerd Font)         # Para mostrar iconos gráficos en el panel
+- dcontrol (opcional)                     # Se ejecuta al hacer clic, si está disponible
+
+[btc.sh]
+
+# ES: Script que muestra los precios actuales de Bitcoin (BTC) y Ethereum (ETH) en USD usando la API de Binance.
+# EN: Script that displays current prices of Bitcoin (BTC) and Ethereum (ETH) in USD using Binance API.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- coreutils           # Utilizado para comandos básicos como printf, sed
+- curl                # Para realizar peticiones HTTP a la API de Binance
+- jq                  # Para procesar la respuesta JSON
+
+[connection.sh]
+
+# ES: Script que muestra información de la conexión de red activa, incluyendo SSID, interfaz, IP local y pública, intensidad de señal y tráfico de red.
+# EN: Script that displays active network connection info including SSID, interface, local and public IPs, signal strength, and network traffic.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- coreutils          # printf, date, awk, sed, etc.
+- curl               # para obtener IP pública
+- jq                 # para parsear JSON (si se necesitara)
+- iproute2 (ip)      # para información de interfaces y rutas
+- iw                 # para info WiFi
+- timeout            # para limitar tiempo de comandos
+- bc                 # para cálculos con decimales
+
+[cortile.sh]
+
+# ES: Script para controlar y visualizar el estado de Cortile, un administrador de ventanas en mosaico. Muestra si está activo o no, y permite activar, desactivar y lanzar acciones mediante un menú interactivo.
+# EN: Script to control and display Cortile's status, a tiling window manager. Shows whether it’s active, and allows toggling or launching actions via an interactive menu.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- coreutils           # printf, date, etc.
+- cortile             # administrador de ventanas en mosaico
+- xdotool             # para enviar combinaciones de teclas
+- yad                 # para generar interfaces gráficas
+
+[cpu.sh]
+
+# ES: Script para mostrar el uso actual de la CPU en porcentaje. Al hacer clic abre el monitor de sistema `btop`. Muestra modelo de CPU y frecuencia por núcleo como tooltip.
+# EN: Script that shows current CPU usage percentage. Clicking opens `btop` system monitor. Displays CPU model and per-core frequency in a tooltip.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- coreutils          # sleep, cat, etc.
+- gawk               # para parsear /proc/cpuinfo
+- grep, sed          # manipulación de texto
+- lm_sensors         # (opcional, no directamente usado pero útil para otras lecturas)
+- btop               # para el monitor gráfico de recursos
+
+[cpu-temp.sh]
+
+# ES: Muestra la temperatura actual de la CPU, usando zonas térmicas del sistema. Selecciona color e ícono según temperatura. Al hacer clic abre `btop`.
+# EN: Displays current CPU temperature using system thermal zones. Changes icon and color based on temp. Click opens `btop`.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- coreutils          # cat, read, etc.
+- gawk               # para extraer vendor_id
+- grep               # (implícito en comprobaciones de archivos)
+- lm_sensors         # para asegurar la presencia de sensores
+- btop               # para abrir monitor de recursos
+
+[date.sh]
+
+# ES: Muestra la fecha actual con un ícono y formato localizado. Al pasar el cursor, despliega un calendario con el día actual resaltado. Clic ejecuta `set-time-for-puppy`.
+# EN: Displays current date with localized formatting and an icon. Hovering shows a calendar with today highlighted. Click runs `set-time-for-puppy`.
+
+Dependencias / Dependencies:
+- bash
+- coreutils     # date, echo, etc.
+- sed           # para traducciones manuales de fecha
+- awk           # para generar calendario interactivo
+- cal           # para obtener el calendario del mes (de `util-linux`)
+- set-time-for-puppy (script externo personalizado, llamado al hacer clic)
+
+[efects.sh]
+
+# ES: Muestra un ícono de estado para Fusilli (gestor de efectos de ventana). Al hacer clic, abre el script `fusilli-menu.sh`.
+# EN: Displays a status icon for Fusilli (window effects manager). Clicking it runs the `fusilli-menu.sh` script.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- coreutils          # echo, test, etc.
+- fusilli-menu.sh    # script personalizado invocado al hacer clic
+
+[favorites.sh]
+
+# ES: Muestra una ventana con accesos directos a herramientas de configuración y utilidades del sistema usando `yad`. Incluye íconos e idioma dinámico.
+# EN: Displays a window with shortcuts to system configuration tools and utilities using `yad`. Includes icons and dynamic language support.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- yad                   # para generar la interfaz gráfica
+- coreutils             # echo, etc.
+- xfce4-settings-manager, xfwm4-tweaks-settings, xfce4-notifyd-config, xfce4-display-settings, xfce4-mouse-settings, xfce4-screenshooter
+- pprocess              # administrador de tareas de Puppy
+- pupcontrol            # utilidad de configuración de Puppy
+- sfs_load              # herramienta para cargar SFS en Puppy
+- quickpet_devuan       # gestor de aplicaciones para Devuanpup
+- ppm                   # Puppy Package Manager
+- panel-config.py       # script personalizado
+- about.sh              # script personalizado
+- `/opt/panelyfusilli/desktop.svg` (ícono)
+
+[firewall-status.sh]
+
+# ES: Muestra el estado del cortafuegos analizando las reglas de iptables. Al hacer clic, permite activarlo o desactivarlo usando `/etc/init.d/rc.firewall`.
+# EN: Displays firewall status by analyzing iptables rules. Click toggles firewall via `/etc/init.d/rc.firewall`.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- iptables             # para verificar y manejar las reglas del cortafuegos
+- coreutils            # echo, chmod, etc.
+- /etc/init.d/rc.firewall  # script de firewall de Puppy o similar
+
+[hdsentinel.sh]
+
+# ES: Muestra información detallada de discos duros y dispositivos USB, incluyendo salud, temperatura, tiempo encendido y tipo de unidad, usando hdsentinel.
+# EN: Displays detailed info of hard drives and USB devices including health, temperature, power-on time, and type using hdsentinel.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- hdsentinel           # para extraer información SMART y estado de discos
+- coreutils            # grep, sed, awk, echo, lsblk, etc.
+- udevadm              # para identificar dispositivos USB
+- gparted              # (opcional, usado en la acción de click para abrir particionador)
+
+[keyboard.sh]
+
+# ES: Muestra el layout de teclado actual con icono y estado de Bloq Mayús y Bloq Num, detecta tema oscuro/claro para colores, y permite cambiar layout con YAD.
+# EN: Shows current keyboard layout with icon and Caps Lock/Num Lock status, detects dark/light theme for colors, and allows layout change via YAD.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- coreutils            # grep, awk, echo, etc.
+- setxkbmap            # para obtener y cambiar layout del teclado
+- xset                 # para detectar estado de Caps Lock y Num Lock
+- yad                  # para interfaz gráfica de selección de layout
+- gsettings (opcional) # para detección de tema GNOME (dark/light)
+
+[memory.sh]
+
+# ES: Muestra información de RAM y SWAP con porcentajes y detalle de módulos (si se ejecuta con root). Soporta idiomas y colores según tema.
+# EN: Displays RAM and SWAP info with percentages and detailed memory module info (requires root). Supports multilingual text and colors by theme.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- coreutils         # awk, grep, echo, etc.
+- file              # para detectar tipos (aunque no usado explícito aquí)
+- gawk              # para procesamiento avanzado en awk
+- dmidecode         # para obtener detalles de módulos RAM (requiere sudo/root)
+
+[open-windows.sh]
+
+# ES: Muestra iconos y cuenta de ventanas abiertas por aplicación en el escritorio actual, con soporte para distintos gestores de ventanas y papelera. Soporta tooltip y acción clic.
+# EN: Displays icons and counts of open windows by app in the current desktop, supports various window managers and trash status. Shows tooltip and click action.
+
+Dependencias / Dependencies:
+- bash >= 3.2
+- wmctrl             # para gestionar ventanas
+- xrandr             # para detectar resoluciones y pantallas
+-skippy-xd-wrapper  #Herramienta que muestra una vista en miniatura
+
+--continue--
