@@ -1,6 +1,8 @@
 # 🐾 XFCE Genmon Plugin Suite para Puppy Linux
 
-📘 [English version](README-EN.md)
+📘 [English version](README-EN.md) 
+[![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/)
+
 
 Una colección modular de scripts diseñados para el plugin Genmon en XFCE, que permite construir **paneles completos exclusivamente con scripts**, sin necesidad de applets adicionales. Esta suite está optimizada para Puppy Linux y se integra directamente en su sistema de archivos.
 
@@ -246,9 +248,8 @@ fi
 ```
 ---
 
-![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)
+ ![TOGGLE](https://i.postimg.cc/SKQyCNch/animated2.gif)
 
----
 
 ## 🛠️ Diseños Personalizados con Genmon: ¡Creatividad sin límites!
 
@@ -360,4 +361,5 @@ mas completo.
         Mié  24 °C   Soleado
         Jue  24 °C   Soleado
         Vie  24 °C   Soleado </tooltip>
----
+```
+[![WTFPL License](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png)](http://www.wtfpl.net/)

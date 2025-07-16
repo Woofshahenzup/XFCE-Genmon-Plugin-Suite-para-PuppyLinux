@@ -201,7 +201,7 @@ else
     ICON_FOR_FONT="$ICON"
 fi
 
-DISPLAY_LINE=" <span size=\"16000\" foreground=\"$ICON_COLOR\">$ICON_FOR_FONT </span> $DESC $TEMP°C "
+DISPLAY_LINE=" <span size=\"16000\" foreground=\"$ICON_COLOR\" weight='bold'>$ICON_FOR_FONT </span><span weight='bold'> $DESC $TEMP°C</span> "
 
 
 TOOLTIP="<tool>"
