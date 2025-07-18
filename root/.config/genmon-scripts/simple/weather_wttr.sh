@@ -201,17 +201,17 @@ else
     ICON_FOR_FONT="$ICON"
 fi
 
-DISPLAY_LINE=" <span size=\"16000\" foreground=\"$ICON_COLOR\" weight='bold'>$ICON_FOR_FONT </span><span weight='bold'> $DESC $TEMP°C</span> "
+DISPLAY_LINE=" <span size=\"16000\" foreground=\"$ICON_COLOR\" weight='bold'>$ICON_FOR_FONT</span><span weight='bold'> $DESC $TEMP°C</span> "
 
 
 TOOLTIP="<tool>"
-TOOLTIP+="  $CITY_NAME, $COUNTRY\n "
-TOOLTIP+="──────────────────────────\n "
-TOOLTIP+="   <span font_family=\"$FONT_ICON\" size=\"32000\" foreground=\"$ICON_COLOR\">$ICON</span> <span font_family=\"$FONT_TEMP\" size=\"36000\" foreground=\"$ICON_COLOR\"> $TEMP°C</span>\n "
-TOOLTIP+="──────────────────────────\n"
-TOOLTIP+="<span foreground=\"#FFB347\"></span>  ${LABEL_MAX} $MAX°C / <span foreground=\"#FFB347\"></span>  ${LABEL_MIN} $MIN°C\n "
-TOOLTIP+="<span foreground=\"#76D7C4\"> </span> ${LABEL_WIND} ${WIND} km/h / <span size=\"22000\" foreground=\"#5DADE2\"></span> ${LABEL_HUMIDITY} ${HUMIDITY}%\n "
-TOOLTIP+="──────────────────────────\n"
+TOOLTIP+="  <span font_family=\"$FONT_TEMP\" weight='bold'>$CITY_NAME, $COUNTRY</span>\n "
+TOOLTIP+="<span font_family=\"$FONT_TEMP\" weight='bold'>──────────────────────────</span>\n "
+TOOLTIP+="     <span font_family=\"$FONT_TEMP\" size=\"32000\" foreground=\"$ICON_COLOR\" weight='bold'>$ICON</span> <span font_family=\"$FONT_TEMP\" size=\"36000\" foreground=\"$ICON_COLOR\" weight='bold'> $TEMP°C</span>\n "
+TOOLTIP+="<span font_family=\"$FONT_TEMP\" weight='bold'>──────────────────────────</span>\n "
+TOOLTIP+="<span font_family=\"$FONT_TEMP\" foreground=\"#FFB347\" weight='bold'></span> <span font_family=\"$FONT_TEMP\" weight='bold'> ${LABEL_MAX} $MAX°C </span><span font_family=\"$FONT_TEMP\" foreground=\"#FFB347\" weight='bold'></span> <span font_family=\"$FONT_TEMP\" weight='bold'> ${LABEL_MIN} $MIN°C</span>\n "
+TOOLTIP+="<span font_family=\"$FONT_TEMP\" foreground=\"#76D7C4\" weight='bold'></span> <span font_family=\"$FONT_TEMP\" weight='bold'> ${LABEL_WIND} ${WIND} km/h </span><span font_family=\"$FONT_TEMP\" size=\"22000\" foreground=\"#5DADE2\" weight='bold'></span> <span font_family=\"$FONT_TEMP\" weight='bold'> ${LABEL_HUMIDITY} ${HUMIDITY}%</span>\n "
+TOOLTIP+="<span font_family=\"$FONT_TEMP\" weight='bold'>──────────────────────────</span>\n"
 FORECAST_DAYS=$(echo "$FORECAST" | jq -r '.weather[:3][] | "\(.date)|\(.avgtempC)|\(.hourly[4].weatherDesc[0].value)"')
 while IFS='|' read -r date temp desc; do
     day=$(LANG=$LANG_CODE.UTF-8 date -d "$date" +%a)
@@ -240,9 +240,9 @@ fi
         *hail*) local_icon="🌨️"; local_icon_color="#B0E0E6" ;;
     esac
 
- desc=$(translate_weather_desc "$desc_lower")
+  desc=$(translate_weather_desc "$desc_lower")
 
-    TOOLTIP+="    $day  $temp °C <span foreground=\"$local_icon_color\"> $local_icon </span> $desc\n"
+    TOOLTIP+="  <span font_family=\"$FONT_TEMP\" weight='bold'>$day $temp °C </span><span foreground=\"$local_icon_color\" font_family=\"$FONT_TEMP\" weight='bold'>$local_icon</span><span font_family=\"$FONT_TEMP\" weight='bold'>  $desc</span>\n"
 done <<< "$FORECAST_DAYS"
 
 TOOLTIP+="</tool>"
@@ -250,12 +250,12 @@ WINDOW_ICON="weather-clear"
 
 # Acción clic para cambiar ciudad
 TXTCLICK="<txtclick>bash -c '
-NEW_CITY=\$(yad --entry \
-    --title=\"$LABEL_CITY_UPDATED\" \
-    --text=\"$LABEL_CITY_PROMPT\" \
-    --entry-text=\"$CITY\" \
-    --center \
-    --width=350 \
+NEW_CITY=\$(yad --entry \\
+    --title=\"$LABEL_CITY_UPDATED\" \\
+    --text=\"$LABEL_CITY_PROMPT\" \\
+    --entry-text=\"$CITY\" \\
+    --center \\
+    --width=350 \\
     --window-icon=$WINDOW_ICON);
 
 if [ -n \"\$NEW_CITY\" ] && [ \${#NEW_CITY} -ge 3 ]; then
@@ -268,20 +268,20 @@ if [ -n \"\$NEW_CITY\" ] && [ \${#NEW_CITY} -ge 3 ]; then
     if [ -n \"\$FETCH_RESULT\" ] && echo \"\$FETCH_RESULT\" | jq . >/dev/null 2>&1; then
         echo \"\$NEW_CITY\" > \"$CITY_FILE\"
         echo \"\$FETCH_RESULT\" > \"/tmp/genmon_weather_cache_\$NEW_CITY_MD5.json\"
-        yad --title=\"$LABEL_CITY_UPDATED\" \
-            --text=\"$LABEL_CITY_UPDATED_MSG \$NEW_CITY\" \
-            --button=OK \
-            --center \
-            --width=350 \
-            --timeout=3 \
+        yad --title=\"$LABEL_CITY_UPDATED\" \\
+            --text=\"$LABEL_CITY_UPDATED_MSG \$NEW_CITY\" \\
+            --button=OK \\
+            --center \\
+            --width=350 \\
+            --timeout=3 \\
             --window-icon=weather-clear
     else
-        yad --title=\"Error\" \
-            --text=\"$LABEL_FETCH_ERROR: \$NEW_CITY\" \
-            --button=OK \
-            --center \
-            --width=300 \
-            --timeout=5 \
+        yad --title=\"Error\" \\
+            --text=\"$LABEL_FETCH_ERROR: \$NEW_CITY\" \\
+            --button=OK \\
+            --center \\
+            --width=300 \\
+            --timeout=5 \\
             --window-icon=dialog-error
     fi
 fi

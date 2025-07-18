@@ -59,7 +59,7 @@ work more predictably, especially if using XFCE with Genmon.
 XFCE environment with the Genmon plugin enabled.
 Python 3 + PyGObject to run config-panel.py.
 Nerd Font installed for visual icons.
-
+Check deps  [Deps-per-scrit](./DEPS-PER-SCRIPT.txt)
 ## ⚠️ Considerations
 
 Dependencies not always pre-installed. Some distros do not include tools such as jq, yad, pmount, or pavucontrol by default. You must install them manually.

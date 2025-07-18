@@ -3,23 +3,6 @@
 # Configurar localización
 export LC_ALL=en_US.UTF-8
 
-# === 🌐 Detectar idioma del sistema ===
-LANG_CODE=$(echo "$LANG" | cut -d '_' -f1 | tr '[:upper:]' '[:lower:]')
-
-# === 🗣️ Texto según idioma ===
-set_texts() {
-    case "$1" in
-        es)
-            LABEL_TOOLTIP="Mostrar/Ocultar fecha"
-            ;;
-        *)
-            LABEL_TOOLTIP="Show/Hide Date"
-            ;;
-    esac
-}
-
-set_texts "$LANG_CODE"
-
 # Archivos a alternar en ~/.config/genmon-hide/
 FILES=("date")
 
@@ -28,12 +11,16 @@ mkdir -p "$HOME/.config/genmon-hide"
 
 # Archivo que mantiene el estado global del toggle
 TOGGLE_STATE_FILE="$HOME/.config/genmon-hide/.toggle_state_date"
+# === 🖋️ Configuración tipográfica ===
+FONT_MAIN="Terminess Nerd Font"
+FONT_SIZE_TOOLTIP="14"
+FONT_WEIGHT="Bold"
 
 # Leer el estado del toggle
 if [ -f "$TOGGLE_STATE_FILE" ]; then
     TOGGLE_STATE=$(cat "$TOGGLE_STATE_FILE")
 else
-    TOGGLE_STATE="hidden"
+    TOGGLE_STATE="hidden" # Estado inicial por defecto
 fi
 
 # Alternar el estado general
@@ -43,7 +30,7 @@ if [[ "$1" == "toggle" ]]; then
         for FILE in "${FILES[@]}"; do
             FILE_PATH="$HOME/.config/genmon-hide/$FILE"
             if [ -f "$FILE_PATH" ]; then
-                rm "$FILE_PATH"
+                rm "$FILE_PATH"  # Restaurar solo los ocultos
             fi
         done
     else
@@ -51,18 +38,18 @@ if [[ "$1" == "toggle" ]]; then
         for FILE in "${FILES[@]}"; do
             FILE_PATH="$HOME/.config/genmon-hide/$FILE"
             if [ ! -f "$FILE_PATH" ]; then
-                touch "$FILE_PATH"
+                touch "$FILE_PATH"  # Ocultar solo los visibles
             fi
         done
     fi
-    echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"
+    echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"  # Guardar el estado del toggle
 fi
 
-# === 🎨 Iconos ===
-ICON_UP=" "
-ICON_RIGHT=" "
-ICON_COLOR_UP="#FFBC00"
-ICON_COLOR_RIGHT="#D54A57"
+# Definir los iconos
+ICON_UP=" "  # Flecha hacia arriba
+ICON_RIGHT=" "   # Flecha hacia la derecha
+ICON_COLOR_UP="#FFBC00"  # Color del icono
+ICON_COLOR_RIGHT="#D54A57"  # Color
 
 # Determinar el estado general basado en "date"
 if [ -f "$HOME/.config/genmon-hide/date" ]; then
@@ -71,11 +58,11 @@ else
     ICON="<span foreground='$ICON_COLOR_UP' background='#383148'>$ICON_UP</span>"
 fi
 
-# Acción de clic
+# Acción de clic: ejecutar el script con el argumento "toggle"
 ACTION="<txtclick>/root/.config/genmon-scripts/simple/toggle-date.sh toggle</txtclick>"
 
-# Tooltip con localización
-MOREINFO="<tool>$LABEL_TOOLTIP</tool>"
+# Tooltip estilizado con fuente personalizada
+MOREINFO="<tool><span font_desc='${FONT_MAIN} ${FONT_WEIGHT} ${FONT_SIZE_TOOLTIP}'>Show/Hide Date</span></tool>"
 
 # Salida para GenMon
 echo -e "<txt>${ICON}</txt>"

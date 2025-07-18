@@ -65,6 +65,7 @@ En distribuciones como Debian, Ubuntu, Arch, Fedora, etc., estos scripts
     Entorno XFCE con el plugin Genmon activo.
     Python 3 + PyGObject para ejecutar config-panel.py.
     Fuentes tipo Nerd Font instaladas para íconos visuales.   
+    Revisa las dependencia por scripts [Deps-per-scrit](./DEPS-PER-SCRIPT.txt)
     
 ## ⚠️ Consideraciones
 

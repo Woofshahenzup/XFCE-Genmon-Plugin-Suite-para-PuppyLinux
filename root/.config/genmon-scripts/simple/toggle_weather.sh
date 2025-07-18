@@ -3,25 +3,12 @@
 # Configurar localización
 export LC_ALL=en_US.UTF-8
 
-# === 🌐 Detectar idioma del sistema ===
-LANG_CODE=$(echo "$LANG" | cut -d '_' -f1 | tr '[:upper:]' '[:lower:]')
-
-# === 🗣️ Texto según idioma ===
-set_texts() {
-    case "$1" in
-        es)
-            LABEL_TOOLTIP="Mostrar/Ocultar elementos"
-            ;;
-        *)
-            LABEL_TOOLTIP="Show/Hide elements"
-            ;;
-    esac
-}
-
-set_texts "$LANG_CODE"
-
 # Archivos a alternar en ~/.config/genmon-hide/
 FILES=("trash" "brightness2" "ram" "firewall" "cpu" "brightness" "weather")
+# === 🎨 Tipografía centralizada ===
+FONT_MAIN="Terminess Nerd Font"
+FONT_SIZE_TOOLTIP="14"
+FONT_WEIGHT="Bold"
 
 # Asegurar que el directorio existe
 mkdir -p "$HOME/.config/genmon-hide"
@@ -33,7 +20,7 @@ TOGGLE_STATE_FILE="$HOME/.config/genmon-hide/.toggle_state_weather"
 if [ -f "$TOGGLE_STATE_FILE" ]; then
     TOGGLE_STATE=$(cat "$TOGGLE_STATE_FILE")
 else
-    TOGGLE_STATE="hidden"
+    TOGGLE_STATE="hidden" # Estado inicial por defecto
 fi
 
 # Alternar el estado general respetando los estados manuales
@@ -55,12 +42,12 @@ if [[ "$1" == "toggle" ]]; then
             fi
         done
     fi
-    echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"
+    echo "$TOGGLE_STATE" > "$TOGGLE_STATE_FILE"  # Guardar el estado del toggle
 fi
 
-# === 🎨 Iconos y colores ===
-ICON_UP=" "
-ICON_RIGHT=" "
+# Definir los iconos y colores
+ICON_UP=" "  # Flecha hacia arriba
+ICON_RIGHT=" "   # Flecha hacia la derecha
 ICON_COLOR_UP="#FFBC00"
 ICON_COLOR_RIGHT="#D54A57"
 
@@ -72,11 +59,11 @@ else
     ICON="<span foreground='$ICON_COLOR_UP' background='#383148'>$ICON_UP</span>"
 fi
 
-# Acción de clic
+# Acción de clic: ejecutar el script con el argumento "toggle"
 ACTION="<txtclick>bash /root/.config/genmon-scripts/simple/toggle_weather.sh toggle</txtclick>"
 
-# Tooltip con localización
-MOREINFO="<tool>$LABEL_TOOLTIP</tool>"
+# Tooltip
+MOREINFO="<tool><span font_desc='${FONT_MAIN} ${FONT_WEIGHT} ${FONT_SIZE_TOOLTIP}'>Show/Hide elements</span></tool>"
 
 # Salida para GenMon
 echo -e "<txt>${ICON}</txt>"

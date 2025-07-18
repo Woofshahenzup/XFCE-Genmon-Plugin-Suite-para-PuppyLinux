@@ -11,17 +11,15 @@ set_tooltip_texts() {
         es)
             TOOLTIP_STATUS="Estado de la batería"
             TOOLTIP_LEVEL="Nivel"
-            TOOLTIP_NO_BATTERY="<tool><span foreground='#FF5733'>Batería no detectada</span></tool>"
+            TOOLTIP_NO_BATTERY="<tool><span $TOOLTIP_STYLE foreground='#FF5733'>Batería no detectada</span></tool>"
             ;;
         *)
             TOOLTIP_STATUS="Battery status"
             TOOLTIP_LEVEL="Level"
-            TOOLTIP_NO_BATTERY="<tool><span foreground='#FF5733'>No Battery Detected</span></tool>"
+            TOOLTIP_NO_BATTERY="<tool><span $TOOLTIP_STYLE foreground='#FF5733'>No Battery Detected</span></tool>"
             ;;
     esac
 }
-
-set_tooltip_texts "$LANG_CODE"
 
 # === Visual Settings ===
 
@@ -29,6 +27,9 @@ set_tooltip_texts "$LANG_CODE"
 FONT_NAME="Terminess Nerd Font"
 FONT_SIZE="12000"
 FONT_WEIGHT="bold"
+TOOLTIP_STYLE="font_family='$FONT_NAME' font_size='$FONT_SIZE' weight='$FONT_WEIGHT'"
+
+set_tooltip_texts "$LANG_CODE"
 
 # --- Icon Set (Nerd Fonts) ---
 ICON_SET_DISCHARGING=( "" "" "" "" "" )
@@ -139,7 +140,7 @@ esac
 DISPLAY_LINE="<span foreground='$COLOR'> $ICON  $PERCENT% </span>"
 
 MORE_INFO="<tool>"
-MORE_INFO+="<span font_family='$FONT_NAME' font_size='$FONT_SIZE' weight='$FONT_WEIGHT'>"
+MORE_INFO+="<span $TOOLTIP_STYLE>"
 MORE_INFO+="$TOOLTIP_STATUS: <span foreground='$COLOR'>$STATUS</span>\n"
 MORE_INFO+="$TOOLTIP_LEVEL: <span foreground='$COLOR'>$PERCENT%</span>"
 MORE_INFO+="</span>"
